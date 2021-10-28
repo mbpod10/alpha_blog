@@ -1,9 +1,22 @@
-
 <h1>Article Index Page</h1>
 
-<% @articles.each do |article| %>
-  <p><b>ID:</b> <%= article.id %></p>
-  <p><b>Title:</b> <%= article.title %></p>
-  <p><b>Description:</b> <%= article.description %> </p>
-  <p><b>Created:</b> <%= article.created_at %> </p>
-<% end %>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>        
+        <td><%= article.id %></td>
+        <td><%= article.title %></td>
+        <td> <%= article.description %> </td>
+        <td><%= article.created_at %> </td>
+      </tr>
+    <% end %>           
+  </tbody>
+</table>

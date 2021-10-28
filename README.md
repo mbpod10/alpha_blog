@@ -151,12 +151,13 @@ Verb              | GET
 URI               | /articles/:id(.:format)
 Controller#Action | articles#show
 ```
-### Create Controller
+### Create Controller (Show By Id)
 In `controllers` folder create a new file called `articles_controller.rb`
 CREATE AN INSTANCE VARIABLE WITH the `@` convention
 
 ```rb
 # app/controllers/articles_controller.rb
+
 class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])   
@@ -177,9 +178,55 @@ since we expect an HTML template to be rendered for such requests. If that's the
 Now, we need to create a `articles` folder in the `app/views`folder and create a `show.html.erb` inside
 - THE `show.html.erb` corresponds to the `show` method in the `app/controllers/articles_controller.rb` file 
 
+go to `http://localhost:3000/articles/1` and the detail page will display the first article of id = 1
+
 ```rb
 # app/views/articles/show.html.erb
+
 <h1>Show article details</h1>
 <p><b>Title:</b> <%= @article.title %></p>
 <p><b>Description:</b> <%= @article.description %> </p>
 ```
+
+### Create Controller (Index)
+Now, we want to render all the articles in our database to our front end.
+
+- Go back to `config/routes` and include `index` in the route constraints
+
+```rb
+# config/routes.rb
+
+Rails.application.routes.draw do
+  resources :articles, only: [:show, :index]
+end
+```
+
+Like before, we now want to create an `index` method in our ArticlesController and use Active Record to create an instance of all the articles.
+```rb
+#app/controllers/articles_controller.rb
+
+class ArticlesController < ApplicationController
+  def show  
+    @article = Article.find(params[:id])   
+  end
+
+  def index    
+    @articles = Article.all
+  end
+
+end
+```
+
+Now, we need to create an `index.html.erb` file in `app/views/articles` folder and loop through each article in the instance @articles and render then to the page
+```rb
+#app/views/articles/index.html.erb
+
+<h1>Article Index Page</h1>
+<% @articles.each do |article| %>
+  <p><b>ID:</b> <%= article.id %></p>
+  <p><b>Title:</b> <%= article.title %></p>
+  <p><b>Description:</b> <%= article.description %> </p>
+  <p><b>Created:</b> <%= article.created_at %> </p>
+<% end %>
+```
+go to `http://localhost:3000/articles` and see the rendered html
