@@ -8,7 +8,7 @@
 `git commit -m 'first commit`
 `git push origin master`
 
-## BACKEND
+## BACK END
 
 `rails generate migration create_articles`
 
@@ -74,7 +74,7 @@ class Article < ApplicationRecord
   
 end
 ```
-### Enter Rails Databae Console
+### Enter Rails Database Console
 `rails c`
 - Test connection with Article model
 - This console uses Active Record as the Object Relational Mapper (a way for Ruby To Communicate With SQL Database)
@@ -88,20 +88,20 @@ article = Article.new
 article.title = "second article"
 article.description = "desc of second art"
 article.save()
-OR
+# OR
 article = Article.new(title: "third article", description: "desc of third art")
 article.save()
 exit
 ```
 
-| Action            |               Active Record                |                                         SQL Equivalent |
-| ----------------- | :----------------------------------------: | -----------------------------------------------------: |
-| get all articles  |                Article.all                 |                                 SELECT * FROM articles |
-| create article    | Article.create(title: "", description: "") | INSERT INTO articles(title, description) VALUES("","") |
-| GET by id         |              Article.find(1)               |                    SELECT * FROM articles WHERE id = 1 |
-| GET first article |               Article.first                |         SELECT * FROM articles ORDER BY id ASC LIMIT 1 |
-| GET last article  |                Article.last                |        SELECT * FROM articles ORDER BY id DESC LIMIT 1 |
-| DELETE BY id      |              article.destroy               |                                                      - |
+| Action             |               Active Record                |                                         SQL Equivalent |
+| ------------------ | :----------------------------------------: | -----------------------------------------------------: |
+| get all articles   |                Article.all                 |                                 SELECT * FROM articles |
+| create article     | Article.create(title: "", description: "") | INSERT INTO articles(title, description) VALUES("","") |
+| GET by id          |              Article.find(1)               |                    SELECT * FROM articles WHERE id = 1 |
+| GET first article  |               Article.first                |         SELECT * FROM articles ORDER BY id ASC LIMIT 1 |
+| GET last article   |                Article.last                |        SELECT * FROM articles ORDER BY id DESC LIMIT 1 |
+| DELETE BY variable |              article.destroy               |                                                      - |
 
 ```rb
 article = Article.find(3)
@@ -134,4 +134,52 @@ article.errors.full_messages
  "Description is too short (minimum is 10 characters)"]
 ```
 
-# FRONTEND
+# FRONT END
+### Create Routes
+Start rails servers with `rails s`
+in `config/routes.rb` file add the resources
+```rb
+Rails.application.routes.draw do
+  resources :articles, only: [:show]
+end
+```
+check routes with `rails routes --expanded`
+```rb
+--[ Route 1 ]
+Prefix            | article
+Verb              | GET
+URI               | /articles/:id(.:format)
+Controller#Action | articles#show
+```
+### Create Controller
+In `controllers` folder create a new file called `articles_controller.rb`
+CREATE AN INSTANCE VARIABLE WITH the `@` convention
+
+```rb
+# app/controllers/articles_controller.rb
+class ArticlesController < ApplicationController
+  def show
+    @article = Article.find(params[:id])   
+  end
+end
+```
+ERROR:
+```
+No template for interactive request
+ArticlesController#show is missing a template for request formats: text/html 
+NOTE!
+Unless told otherwise, Rails expects an action to render a template with the same name,
+contained in a folder named after its controller. If this controller is an API responding with 204 (No Content),
+which does not require a template, then this error will occur when trying to access it via browser,
+since we expect an HTML template to be rendered for such requests. If that's the case, carry on.
+```
+
+Now, we need to create a `articles` folder in the `app/views`folder and create a `show.html.erb` inside
+- THE `show.html.erb` corresponds to the `show` method in the `app/controllers/articles_controller.rb` file 
+
+```rb
+# app/views/articles/show.html.erb
+<h1>Show article details</h1>
+<p><b>Title:</b> <%= @article.title %></p>
+<p><b>Description:</b> <%= @article.description %> </p>
+```
