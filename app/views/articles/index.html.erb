@@ -11,8 +11,8 @@
   </thead>
   <tbody>
     <% @articles.each do |article| %>
-      <tr>        
-        <td><%= article.id %></td>
+      <tr>      
+        <td> <%= link_to article.id , article_path(article.id) %> </td>
         <td><%= article.title %></td>
         <td> <%= article.description %> </td>
         <td><%= article.created_at %> </td>
@@ -20,3 +20,6 @@
     <% end %>           
   </tbody>
 </table>
+
+<br />
+<%= link_to "New Article", "/articles/new" %>

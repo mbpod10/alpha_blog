@@ -222,11 +222,40 @@ Now, we need to create an `index.html.erb` file in `app/views/articles` folder a
 #app/views/articles/index.html.erb
 
 <h1>Article Index Page</h1>
-<% @articles.each do |article| %>
-  <p><b>ID:</b> <%= article.id %></p>
-  <p><b>Title:</b> <%= article.title %></p>
-  <p><b>Description:</b> <%= article.description %> </p>
-  <p><b>Created:</b> <%= article.created_at %> </p>
-<% end %>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>        
+        <td><%= article.id %></td>
+        <td><%= article.title %></td>
+        <td> <%= article.description %> </td>
+        <td><%= article.created_at %> </td>
+      </tr>
+    <% end %>           
+  </tbody>
+</table>
 ```
 go to `http://localhost:3000/articles` and see the rendered html
+
+## FORMS
+Add `new` and `create` to `routes.rb`
+```rb
+# config/routes.rb
+Rails.application.routes.draw do
+
+  resources :articles, only: [:show, :index, :new, :create]
+end
+```
+NOTE: These routes are `keyword routes` for rails, in other words, you cannot add any other than
+`:index, :new, :create, :show, :edit, :update, :destroy`
+
+Create a `new` method in the `articles_controller.rb` and a new view of `new.html.erb` in the `app/views/articles` controller
+Finally go to `http://localhost:3000/articles/new`
