@@ -300,3 +300,4 @@ end
 `git add .`
 `git commit -m 'add user`
 `git checkout master`
+`git merge create-users-table-model`
