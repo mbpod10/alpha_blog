@@ -295,3 +295,8 @@ end
 ```
 `rails c`
 `User.create(username: "mbpod10", email: "beep@gmail.com")`
+
+## Commit Work
+`git add .`
+`git commit -m 'add user`
+`git checkout master`
