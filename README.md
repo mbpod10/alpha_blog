@@ -297,7 +297,21 @@ end
 `User.create(username: "mbpod10", email: "beep@gmail.com")`
 
 ## Commit Work
-`git add .`
-`git commit -m 'add user`
-`git checkout master`
-`git merge create-users-table-model`
+```
+git add .
+git commit -m 'add user'
+git checkout master
+git merge create-users-table-model
+```
+### User Validations
+```rb
+# app/models/user.rb
+class User < ApplicationRecord
+
+  validates :username, presence: true, length:{minimum: 3, maxium: 25}
+  validates :email,
+  format: { with: /\A\S+@.+\.\S+\z/, message: "Email invalid"  },
+            uniqueness: { case_sensitive: false },
+            length: { maximum: 350 }
+end
+```
