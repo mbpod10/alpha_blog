@@ -259,3 +259,39 @@ NOTE: These routes are `keyword routes` for rails, in other words, you cannot ad
 
 Create a `new` method in the `articles_controller.rb` and a new view of `new.html.erb` in the `app/views/articles` controller
 Finally go to `http://localhost:3000/articles/new`
+
+## Add New Git Branch
+`git checkout -b create-users-table-model`
+`>> Switched to a new branch 'create-users-table-model'`
+`git branch`
+```
+* create-users-table-model
+master
+```
+Switch back to master
+`git checkout master`
+Switch back to `'create-users-table-model'`
+
+## Users
+`rails generate migration create_users`
+Go To Migration File `db/migrate/<MIGRATION_FILE>`
+```rb
+class CreateUsers < ActiveRecord::Migration[7.0]
+  def change
+    create_table :users do |t|
+      t.string :username
+      t.string :email
+      t.timestamps
+    end
+  end
+end
+```
+`rails db:migrate`
+
+Create `user` model in `app/models/users.rb`
+```rb
+class User < ApplicationRecord 
+end
+```
+`rails c`
+`User.create(username: "mbpod10", email: "beep@gmail.com")`
