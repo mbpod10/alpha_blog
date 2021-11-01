@@ -1,7 +1,7 @@
-
 class ArticlesController < ApplicationController
-  def show  
-    @article = Article.find(params[:id])   
+  before_action :set_article, only:[:show, :edit, :update, :destroy]
+
+  def show      
   end
 
   def index    
@@ -12,15 +12,11 @@ class ArticlesController < ApplicationController
     @article = Article.new
   end
 
-  def edit
-    @article = Article.find(params[:id]) 
+  def edit     
   end
 
-# BE WEARY OF ARTICLE MODEL VALIDATIONS
-# ARTICLE WILL NOT BE CREATED IF DOES 
-# NOT MEET MIN/MAX CONSTRAINTS
   def create
-    @article = Article.new(params.require(:article).permit(:title, :description))
+    @article = Article.new(article_params)
     if @article.save
       flash[:notice] = "Article was created successfully!"
       redirect_to @article
@@ -29,14 +25,29 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def update
-    @article = Article.find(params[:id]) 
-    if @article.update(params.require(:article).permit(:title, :description))
+  def update     
+    if @article.update(article_params)
       flash[:notice] = "Article #{params[:id].to_s} Was Updated"
       redirect_to @article
     else
       render 'edit'
     end
   end
+
+  def destroy    
+    @article.destroy
+    redirect_to articles_path
+  end
+
+  private
+  
+  def set_article
+    @article = Article.find(params[:id])
+  end
+
+  def article_params
+    params.require(:article).permit(:title, :description)
+  end
+  
 
 end

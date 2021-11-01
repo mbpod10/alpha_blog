@@ -2,8 +2,7 @@
 
 <table>
   <thead>
-    <tr>
-      <th>ID</th>
+    <tr>      
       <th>Title</th>
       <th>Description</th>
       <th>Action</th>
@@ -12,14 +11,16 @@
   <tbody>
     <% @articles.each do |article| %>
       <tr>      
-        <td> <%= link_to article.id , article_path(article.id) %> </td>
         <td><%= article.title %></td>
         <td> <%= article.description %> </td>
-        <td><%= article.created_at %> </td>
+        <td> <%= link_to "Show" , article_path(article) %> </td>
+        <td><%= link_to 'Edit', edit_article_path(article) %> </td>
+        <td><%= button_to 'Delete', article_path(article.id), method: :delete %> </td>
       </tr>
     <% end %>           
   </tbody>
 </table>
 
 <br />
-<%= link_to "New Article", "/articles/new" %>
+<%= link_to "New Article", "/articles/new" %> <br />
+<%= link_to "New Article Link", new_article_path %>

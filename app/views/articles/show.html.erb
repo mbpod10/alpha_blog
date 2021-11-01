@@ -3,4 +3,6 @@
 <p><b>Title:</b> <%= @article.title %></p>
 <p><b>Description:</b> <%= @article.description %> </p>
 <p><b>Created:</b> <%= @article.created_at %> </p>
+<%= link_to "Edit", edit_article_path(@article) %> <br />
+<%= button_to 'Delete', article_path(@article), method: :delete %> <br />
 <%= link_to "Articles", "/articles" %>
