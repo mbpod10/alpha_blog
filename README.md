@@ -390,4 +390,26 @@ user.articles
 ```rb
 Article.update_all(user_id: User.first.id)
 ```
-### Authentication
+# Authentication
+### Password
+`rails generate migration add_password_digest_to_users`
+```rb
+# new migration file
+class AddPasswordDigestToUsers < ActiveRecord::Migration[7.0]
+  def change
+    add_column :users, :password_digest, :string
+  end
+end
+
+```
+`rails db:migrate`
+- Check to see if password_digest was added to users in rails console
+```
+rails c
+User.all
+```
+### Create A Hashed Password
+```rb
+BCrypt::Password.create("password")
+=> "$2a$12$cLXMpoYh5HzPKaE4QU.cMedPswDsKHHhKcVtbnUbs/2focx656Xo."
+```
