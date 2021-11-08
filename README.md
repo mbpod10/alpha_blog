@@ -272,6 +272,15 @@ Switch back to master
 `git checkout master`
 Switch back to `'create-users-table-model'`
 
+CREATE COMMMIT
+```
+git add .
+git commit -m '<MESSAGE>
+git checkout master
+git merge create-users-table-model
+git push origin master
+```
+
 ## Users
 `rails generate migration create_users`
 Go To Migration File `db/migrate/<MIGRATION_FILE>`
@@ -315,3 +324,70 @@ class User < ApplicationRecord
             length: { maximum: 350 }
 end
 ```
+## Add Foreign Key To Articles Schema
+`rails generate migration add_user_id_to_articles`
+```rb
+class AddUserIdToArticles < ActiveRecord::Migration[7.0]
+  def change
+    add_column :articles, :user_id, :int
+  end
+end
+```
+`rails db:migrate`
+
+```rb
+# db/schema.rb
+
+ActiveRecord::Schema.define(version: 2021_11_01_183924) do
+
+  create_table "articles", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", precision: 6
+    t.datetime "updated_at", precision: 6
+ => t.integer "user_id" <=
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+end
+```
+Now we need to create the relationship in the models folder
+```rb
+#app/models/user.rb
+class User < ApplicationRecord
+  has_many :articles <=======
+  VALID_EMAIL_REGEX = /\A\S+@.+\.\S+\z/
+  validates :username, presence: true, uniqueness: { case_sensitive: false }, 
+            length:{minimum: 3, maxium: 25, message:"Username Must Be At Least 3 Characters and Less Than 26"}
+  validates :email, presence: true,
+            format: { with: VALID_EMAIL_REGEX, message: "Email Invalid"  },
+            uniqueness: { case_sensitive: false, message: "Email Registered With Existing User" },
+            length: { maximum: 105 }
+end
+#app/models/article.rb
+class Article < ApplicationRecord
+  belongs_to :user <============
+  validates :title, presence: true, length:{minimum: 6, maxium: 100}
+  validates :description, presence: true, length:{minimum: 10, maxium: 300}
+end
+```
+
+### Shovel An Article To A User to See Relationship Works
+```rb
+rails c
+user = User.first
+article = article.first
+user.articles << article
+user.articles
+```
+### Update All Articles
+```rb
+Article.update_all(user_id: User.first.id)
+```
+### Authentication
