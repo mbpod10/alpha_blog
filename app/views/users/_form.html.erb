@@ -1,0 +1,24 @@
+<h1> Create New User </h1>
+
+<%= form_with(model: @user, local: true)  do |f| %>
+  <p>
+    <%= f.label :username %> <br/>
+    <%= f.text_field :username %>
+  </p>
+
+  <p>
+    <%= f.label :email %><br/>
+    <%= f.email_field :email %>
+  </p>
+
+  <p>
+    <%= f.label :password %><br/>
+    <%= f.password_field :password %>
+  </p>
+
+  <p>
+    <%= f.submit "Sign Up" %>   
+  </p>
+<%end%>
+
+<%= link_to "Articles", "/articles" %>

@@ -413,3 +413,17 @@ User.all
 BCrypt::Password.create("password")
 => "$2a$12$cLXMpoYh5HzPKaE4QU.cMedPswDsKHHhKcVtbnUbs/2focx656Xo."
 ```
+
+## Create Browser Login
+Change the `config/routes.rb` file to accept the new route
+```rb
+# config/routes.rb
+Rails.application.routes.draw do
+  resources :articles
+  get 'signup', to: 'users#new'
+end
+```
+Create Users Controller
+```rb
+
+```
