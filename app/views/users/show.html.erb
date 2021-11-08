@@ -1,0 +1,10 @@
+<h3><%= @user.username%>'s Profile Page</h3>
+<h3>Email: <%= @user.email%></h3>
+
+<%= gravatar_for @user, size: 200 %> <br />
+
+
+
+<%=  render 'articles/article' %>
+
+<%= link_to "User List", "/users" %>
