@@ -1,6 +1,8 @@
-<h1>Article Index Page</h1>
-
-<%= render 'article' %>
+<div class="container"> 
+  <h1>Article Index Page</h1>
+  <%= will_paginate @articles %>
+  <%= render 'article' %>
+</div>
 
 <br />
 <%= link_to "New Article", "/articles/new" %> <br />

@@ -427,3 +427,43 @@ Create Users Controller
 ```rb
 
 ```
+
+## BootStrap With Rails 7
+```
+yarn add bootstrap@5.1.3 jquery popper.js
+```
+- Check that `package.json` is created and includes the dependencies we just added
+
+In Gemfile, add two gems
+```rb
+gem 'bootstrap', '~> 5.1.3'
+gem 'jquery-rails'
+```
+Now, in 
+run `bundle install`
+Now in `app/assets/stylesheets/application.css`, rename file with a `.scss` extentsion add `app/assets/stylesheets/application.scss` and finally add:
+```js 
+@import "bootstrap";
+```
+  
+In `app/views/layouts/application.html.erb` add the two script tags. Imperative that this tag correspondes with bootstrap and popper versions in `package.json`
+```rb
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BootstrapProject</title>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>
+```

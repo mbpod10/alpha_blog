@@ -35,9 +35,13 @@ gem "bootsnap", ">= 1.4.4", require: false
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem "bcrypt", "~> 3.1.7"
+gem 'will_paginate', '~> 3.3'
 
 # Use Sass to process CSS
-# gem "sassc-rails", "~> 2.1"
+# gem 'bootstrap-sass', '~> 3.4.1'
+# gem "sassc-rails", "~> 2.1.0"
+gem 'bootstrap', '~> 5.1.3'
+gem 'jquery-rails'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
