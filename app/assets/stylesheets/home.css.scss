@@ -1,0 +1,33 @@
+.home-jumbo {
+  // background-image: asset-url('typewriter.jpg');
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('typewriter.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%; 
+  margin-top: 30px;
+  background-color: darkgrey;
+  padding: 50px;
+  height: 600px;
+  border: 2px black solid;
+}
+
+.home-p {
+  // font-weight: bold;
+  // color: black; 
+  // text-shadow:
+  // -1px -1px 0 rgb(255, 255, 255),
+  // 1px -1px 0 rgb(255, 255, 255),
+  // -1px 1px 0 rgb(255, 255, 255),
+  // 1px 1px 0 rgb(255, 255, 255);  
+  color: white;
+  text-align: center;
+}
+
+.home-button-div {
+  text-align: center;
+}
+
+.home-button {
+  background-color: rgb(18, 204, 18);
+  border: 2px black solid;
+}

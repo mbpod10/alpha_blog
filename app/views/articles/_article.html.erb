@@ -1,21 +1,17 @@
-<table>
-  <thead>
-    <tr>      
-      <th>Title</th>
-      <th>Description</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @articles.each do |article| %>
-      <tr>      
-        <td><%= article.title %></td>
-        <td> <%= article.description %> </td>
-        <td> <%= link_to "Show" , article_path(article) %> </td>
-        <td><%= link_to 'Edit', edit_article_path(article) %> </td>
-        <td><%= button_to 'Delete', article_path(article.id), method: :delete %> </td>
-        <td>By <%= article.user.username %></td>
-      </tr>
-    <% end %>           
-  </tbody>
-</table>
+<% @articles.each do |article| %>
+  <div class="card text-center">
+    <div class="card-header">
+      By <%= article.user.username %>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"><%= article.title %></h5>      
+      <p class="card-text"> <%= article.description %></p>
+       <%= link_to "View", article_path(article), class: "btn btn-outline-success" %>
+       <%= link_to "Edit", edit_article_path(article), class: "btn btn-outline-info" %>
+       <%= button_to "Delete", article_path(article), class: "btn btn-outline-danger", method: :delete %>
+    </div>
+    <div class="card-footer text-muted">
+      <%= distance_of_time_in_words(article.created_at) %>
+    </div>
+  </div>
+ <% end %>  

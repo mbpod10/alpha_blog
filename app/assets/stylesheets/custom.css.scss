@@ -1,9 +1,23 @@
-
-
 .navbar {
-   background-color: yellow !important;
+   background-color: black !important;
 }
 
-button {
-  color: red 
+.navbar-brand {
+  font-size: 2rem !important;
+}
+
+.nav-link, .navbar-brand  {
+  color: lightblue !important;
+}
+
+.navbar-toggler, .navbar-toggler-icon {
+  background-color: lightblue !important;
+}
+
+.card {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 75%;
 }
