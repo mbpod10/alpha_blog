@@ -5,7 +5,7 @@ class ArticlesController < ApplicationController
   end
 
   def index    
-    @articles = Article.paginate(page: params[:page], per_page: 4)
+    @articles = Article.paginate(page: params[:page], per_page: 5)
   end
 
   def new
@@ -28,7 +28,7 @@ class ArticlesController < ApplicationController
 
   def update     
     if @article.update(article_params)
-      flash[:notice] = "Article #{params[:id].to_s} Was Updated"
+      flash[:notice] = "Article Titled '#{@article.title}' Was Updated"
       redirect_to @article
     else
       render 'edit'

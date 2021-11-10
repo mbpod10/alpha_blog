@@ -5,7 +5,7 @@
       <i><%= @article.user.username %></i>
     </div>
     <div class="card-body">    
-      <div class="card-text text-left"> <%= simple_format(@article.description) %></div>       
+      <div class="card-text article-left"> <%= simple_format(@article.description) %></div>       
         <%= link_to "Edit", edit_article_path(@article), class: "btn btn-outline-info" %>
         <%= button_to "Delete", article_path(@article), class: "btn btn-outline-danger", method: :delete %>
     </div>

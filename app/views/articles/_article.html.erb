@@ -1,11 +1,11 @@
 <% @articles.each do |article| %>
   <div class="card text-center">
-    <div class="card-header">
-      <i><%= article.user.username %></i>
+    <div class="card-header">      
+      <i><%= link_to "#{article.user.username}", user_path(article.user), class: "user_index_link" %> </i>
     </div>
     <div class="card-body">
       <h5 class="card-title"><%= article.title %></h5>      
-      <p class="card-text"> <%= article.description %></p>
+      <p class="card-text article-left"> <%= article.description %></p>
        <%= link_to "View", article_path(article), class: "btn btn-outline-success" %>
        <%= link_to "Edit", edit_article_path(article), class: "btn btn-outline-info" %>
        <%= button_to "Delete", article_path(article), class: "btn btn-outline-danger", method: :delete %>
