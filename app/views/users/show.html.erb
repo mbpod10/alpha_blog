@@ -1,10 +1,11 @@
-<h3><%= @user.username%>'s Profile Page</h3>
-<h3>Email: <%= @user.email%></h3>
+<h1 class="text-center mt-4"> <%= @user.username%>'s Profile Page</h1>
+<div class="container user-container">
+  <%= image_tag("spartan.png", :alt => "profile_pic", :class => "img-thumbnail user-index" ) %>     
+</div>
 
-<%= gravatar_for @user, size: 200 %> <br />
-
-
-
-<%=  render 'articles/article' %>
-
-<%= link_to "User List", "/users" %>
+<% if @user.articles.any? %>
+  <h4 class="text-center mt-4"> Articles </h4>
+  <%=render :partial => "articles/article" if @user.articles %>
+<% else %>
+  <h4 class="text-center mt-4"> No Articles Posted Yet </h4>
+<% end %>

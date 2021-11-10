@@ -30,3 +30,14 @@
 .form-group {
   margin-top: 10px !important;
 }
+
+#sticky-footer {
+  flex-shrink: none;
+}
+
+.user-container {
+  text-align: center;
+}
+body{
+  background-color: lightgray;
+}

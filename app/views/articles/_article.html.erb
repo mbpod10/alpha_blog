@@ -1,7 +1,7 @@
 <% @articles.each do |article| %>
   <div class="card text-center">
     <div class="card-header">
-      By <%= article.user.username %>
+      <i><%= article.user.username %></i>
     </div>
     <div class="card-body">
       <h5 class="card-title"><%= article.title %></h5>      

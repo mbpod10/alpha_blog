@@ -1,8 +1,16 @@
-<h1>Show article details</h1>
-<p><b>ID:</b> <%= @article.id %></p>
-<p><b>Title:</b> <%= @article.title %></p>
-<p><b>Description:</b> <%= @article.description %> </p>
-<p><b>Created:</b> <%= @article.created_at %> </p>
-<%= link_to "Edit", edit_article_path(@article) %> <br />
-<%= button_to 'Delete', article_path(@article), method: :delete %> <br />
-<%= link_to "Articles", "/articles" %>
+<div class="container"> 
+  <h1 class="text-center mt-4"><%= @article.title %></h1>
+  <div class="card text-center">
+    <div class="card-header">
+      <i><%= @article.user.username %></i>
+    </div>
+    <div class="card-body">    
+      <div class="card-text text-left"> <%= simple_format(@article.description) %></div>       
+        <%= link_to "Edit", edit_article_path(@article), class: "btn btn-outline-info" %>
+        <%= button_to "Delete", article_path(@article), class: "btn btn-outline-danger", method: :delete %>
+    </div>
+    <div class="card-footer text-muted">
+      <%= time_ago_in_words(@article.created_at) %> ago
+    </div>
+  </div>
+</div>

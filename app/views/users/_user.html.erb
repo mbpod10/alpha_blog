@@ -1,0 +1,18 @@
+<% @users.each do |user| %>
+  <div class="card text-center">
+    <div class="card-header">
+      <%= user.username %>
+    </div>
+    <div class="card-body">   
+      <%# <%= gravatar_for user, size: 200 %>
+      <%= image_tag("spartan.png", :alt => "profile_pic", :class => "img-thumbnail" ) %>
+     
+      <p class="card-text"> <%=  pluralize(user.articles.count, "article") %></p>
+       <%= link_to "View Profile", user_path(user), class: "btn btn-outline-success" %>
+       <%= link_to "Edit Profile", edit_user_path(user), class: "btn btn-outline-info" %>
+    </div>
+    <div class="card-footer text-muted">
+      Joined <%= time_ago_in_words(user.created_at) %> ago
+    </div>
+  </div>
+<% end %>  
