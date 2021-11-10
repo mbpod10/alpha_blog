@@ -11,7 +11,7 @@
        <%= button_to "Delete", article_path(article), class: "btn btn-outline-danger", method: :delete %>
     </div>
     <div class="card-footer text-muted">
-      <%= distance_of_time_in_words(article.created_at) %>
+      <%= time_ago_in_words(article.created_at) %> ago
     </div>
   </div>
  <% end %>  
