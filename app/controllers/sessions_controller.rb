@@ -4,21 +4,27 @@ class SessionsController < ApplicationController
   def new
   end
 
-  def create    
-    if User.where(email: get_credentials[:email]).exists?
-      flash[:notice] = "#{get_credentials[:email]} Exists In Database!"
-      user = User.where(email: get_credentials[:email]).first
-      puts user.username
-      puts user.email
-      puts user.password
-      render 'new'
-    else        
-      flash[:notice] = "#{get_credentials[:email]} Does Not Exist In Database!"
+  def create
+    user = User.find_by(email: get_credentials[:email].downcase)
+    if user
+      if user.authenticate(get_credentials[:password])
+        session[:user_id] = user.id
+        flash[:notice] = "#{get_credentials[:email]} Logged In"
+        redirect_to user
+      else
+        flash.now[:alert] = "Incorrect Password"
+        render 'new'
+      end
+    else
+      flash.now[:alert] = "Email Not Associated With User" 
       render 'new'
     end
   end
 
   def destroy
+    flash[:notice] = "#{session[:user_id]} User Logged Out"
+    session[:user_id] = nil
+    redirect_to root_path
   end
 
   private
