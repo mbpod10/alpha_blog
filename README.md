@@ -467,3 +467,27 @@ In `app/views/layouts/application.html.erb` add the two script tags. Imperative 
   </body>
 </html>
 ```
+
+# Admin
+```
+$ rails generate migration add_admin_to_users
+```
+
+migrations file:
+```rb
+class AddAdminToUsers < ActiveRecord::Migration[7.0]
+  def change
+    add_column :users, :admin, :boolean, default: false
+  end
+end
+```
+```
+$ rails db:migrate
+$ rails c
+```
+```
+user = User.first
+user.toggle!(:admin)
+user.admin?
+=> true
+```

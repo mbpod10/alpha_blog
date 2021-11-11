@@ -30,7 +30,7 @@
           <% if logged_in? %>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <%= current_user.username%>
+                <%= "(Admin)" if current_user.admin? %> <%= current_user.username%>
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li class="nav-item">            
@@ -43,11 +43,19 @@
                 <li class="nav-item">
                     <%= button_to "Delete Profile", user_path(current_user), class: "dropdown-item text-danger", method: :delete %>
                 </li>              
+                <% if current_user.admin? %>
+                  <li><hr class="dropdown-divider"></li>       
+                  <li class="nav-item">              
+                    <%= link_to "Admin", '/admin', class: "dropdown-item"%>
+                  </li>
+                <% end %>
               </ul>
             </li>
             <li class="nav-item">              
               <%= button_to "Logout", logout_path, class: "nav-link logout", method: :post%>
             </li>
+
+
           <% else %>
             <li class="nav-item">
               <%= link_to "Sign Up", '/signup', class: "nav-link" %>

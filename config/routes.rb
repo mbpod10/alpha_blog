@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # resources :articles, only: [:show, :index, :new, :create, :edit, :update, :destroy]
   root 'pages#home'
+  get 'admin', to: 'pages#admin'
   resources :articles
   get 'signup', to: 'users#new'
   # get 'login', to: 'pages#login'

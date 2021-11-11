@@ -3,15 +3,20 @@
     <div class="card-header">
       <%= user.username %>
     </div>
-    <div class="card-body">   
-      <%# <%= gravatar_for user, size: 200 %>
-      <%= image_tag("spartan.png", :alt => "profile_pic", :class => "img-thumbnail" ) %>
-     
+    <div class="card-body">      
+      <%= image_tag("spartan.png", :alt => "profile_pic", :class => "img-thumbnail" ) %>     
       <p class="card-text"> <%=  pluralize(user.articles.count, "article") %></p>
-       <%= link_to "View Profile", user_path(user), class: "btn btn-outline-success" %>
-       <% if logged_in? && user == current_user %>
-        <%= link_to "Edit Profile", edit_user_path(user), class: "btn btn-outline-info" %>
-      <% end %>
+      <div class="button-group">
+        <%= link_to "View Profile", user_path(user), class: "btn btn-outline-success group-b" %>
+        <% if logged_in? %>
+          <% if user == current_user %>
+            <%= link_to "Edit Profile", edit_user_path(user), class: "btn btn-outline-info group-b" %>
+          <% end %>
+          <% if current_user.admin? %>
+            <%= button_to "Delete", user_path(user), class: "btn btn-outline-danger group-b", method: :delete %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
     <div class="card-footer text-muted">
       Joined <%= time_ago_in_words(user.created_at) %> ago
