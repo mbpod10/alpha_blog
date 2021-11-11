@@ -491,3 +491,79 @@ user.toggle!(:admin)
 user.admin?
 => true
 ```
+
+## Automatic Testing
+`/test/models/category_test.rb`
+This is to test the categories `model`
+```rb
+require 'test_helper'
+
+class CategoryTest < ActiveSupport::TestCase
+  
+  def setup
+    @category = Category.new(name: "Sports")
+  end
+
+  test "category should be valid" do
+    assert @category.valid?
+  end
+
+  test "name should be present" do
+    @category.name = " "
+    assert_not @category.valid?
+  end
+
+  test "name should be unique" do
+    @category.save
+    @category2 = Category.new(name: "Sports")
+    assert_not @category2.valid?
+  end
+  
+  test "name should not be too long" do
+    @category.name = "a" * 30
+    assert_not @category.valid?
+  end
+  
+  test "name should not be too short" do
+    @category.name = "a"
+    assert_not @category.valid?
+  end
+    
+
+end
+```
+```
+$ rails test
+```
+Now we want to write enough code to make the error go away in the test
+- Create a new file `app/models/category.rb`
+- 
+```rb
+class Category < ApplicationRecord
+  
+end
+```
+```
+$ rails generate migration create_categories
+```
+- In new migration file
+```rb
+class CreateCategories < ActiveRecord::Migration[7.0]
+  def change
+    create_table :categories do |t|
+      t.string :name
+      t.timestamps
+    end
+  end
+end
+```
+```
+$ rails test
+```
+ ### Test Categories Controllers
+ ```
+ $ rails generate test_unit:scaffold category
+ ```
+ ```
+ $ rails test test/controllers/categories_controller_test.rb
+ ```
