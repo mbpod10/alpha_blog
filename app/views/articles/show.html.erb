@@ -5,9 +5,13 @@
       <i><%= @article.user.username %></i>
     </div>
     <div class="card-body">    
-      <div class="card-text article-left"> <%= simple_format(@article.description) %></div>       
-        <%= link_to "Edit", edit_article_path(@article), class: "btn btn-outline-info" %>
-        <%= button_to "Delete", article_path(@article), class: "btn btn-outline-danger", method: :delete %>
+      <div class="card-text article-left"> <%= simple_format(@article.description) %></div>
+         <% if logged_in? && @article.user == current_user%>
+          <div class="button-group">       
+            <%= link_to "Edit", edit_article_path(@article), class: "btn btn-outline-info group-b" %>
+            <%= button_to "Delete", article_path(@article), class: "btn btn-outline-danger group-b", method: :delete %>
+          </div>
+         <% end %>
     </div>
     <div class="card-footer text-muted">
       <%= time_ago_in_words(@article.created_at) %> ago

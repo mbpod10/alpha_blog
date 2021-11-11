@@ -6,9 +6,13 @@
     <div class="card-body">
       <h5 class="card-title"><%= article.title %></h5>      
       <p class="card-text article-left"> <%= article.description %></p>
-       <%= link_to "View", article_path(article), class: "btn btn-outline-success" %>
-       <%= link_to "Edit", edit_article_path(article), class: "btn btn-outline-info" %>
-       <%= button_to "Delete", article_path(article), class: "btn btn-outline-danger", method: :delete %>
+      <div class="button-group">
+        <%= link_to "View", article_path(article), class: "btn btn-outline-success group-b" %>
+        <% if logged_in? && article.user == current_user%>
+          <%= link_to "Edit", edit_article_path(article), class: "btn btn-outline-info group-b" %>
+          <%= button_to "Delete", article_path(article), class: "btn btn-outline-danger group-b", method: :delete %>
+        <% end %>
+      </div>
     </div>
     <div class="card-footer text-muted">
       <%= time_ago_in_words(article.created_at) %> ago

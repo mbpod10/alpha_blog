@@ -1,7 +1,9 @@
 <h1 class="text-center mt-4"> <%= @user.username%>'s Profile Page</h1>
 <div class="container user-container">
   <%= image_tag("spartan.png", :alt => "profile_pic", :class => "img-thumbnail user-index" ) %> <br/>
-  <%= link_to "Edit Profile", edit_user_path(@user) %>    
+  <% if logged_in? && @user == current_user%>
+    <%= link_to "Edit Profile", edit_user_path(@user) %>
+  <% end %>    
 </div>
 
 <% if @user.articles.any? %>
