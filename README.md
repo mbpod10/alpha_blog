@@ -567,3 +567,50 @@ $ rails test
  ```
  $ rails test test/controllers/categories_controller_test.rb
  ```
+
+ ### Integration Tests
+ ```
+ $ rails generate integration_test create_category
+ $ rails test test/integration/create_category_test.rb 
+ ```
+ ```rb
+ require "test_helper"
+
+class CreateCategoryTest < ActionDispatch::IntegrationTest
+  test "get new category form and create category" do
+    get "/categories/new"
+    assert_response :success
+    assert_difference 'Category.count', 1 do
+      post categories_path, params: {category: {name: 'Sports'}}
+      assert_response :redirect
+    end
+    follow_redirect!
+    assert_response :success
+    assert_match "Sports", response.body
+  end
+end
+ ```
+
+  ```
+ $ rails generate integration_test list_categories
+ $ rails test test/integration/create_category_test.rb 
+ ```
+
+ ## Many To Many Associations
+We are going to create a new table called `article_category` which will only track the id of `articles` and `categories`
+```
+$ rails generate migration create_article_categories
+```
+```rb
+class CreateArticleCategories < ActiveRecord::Migration[7.0]
+  def change
+    create_table :article_categories do |t|
+      t.integer :article_id
+      t.integer :category_id
+    end
+  end
+end
+```
+```
+$ rails db:migrate
+```

@@ -9,7 +9,7 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
            <li class="nav-item">
             <%= link_to "Users", '/users', class: "nav-link" %>
-          </li>        
+          </li>              
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
              Articles
@@ -23,14 +23,30 @@
                   <%= link_to "New Article", '/articles/new', class: "dropdown-item" %>
                 </li>
               <% end %>
-              <li><hr class="dropdown-divider"></li>       
+                    
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+             Categories
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+               <li class="nav-item">            
+                <%= link_to "Categories", categories_path, class: "dropdown-item" %>
+              </li>
+                 <% if logged_in? && current_user.admin? %>
+                  <li class="nav-item">
+                    <%= link_to "New Category", new_category_path, class: "dropdown-item" %>
+                  </li>
+                <% end %>
+                   
             </ul>
           </li>
 
           <% if logged_in? %>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <%= "(Admin)" if current_user.admin? %> <%= current_user.username%>
+                <%= "" if current_user.admin? %> <%= current_user.username%>
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li class="nav-item">            
@@ -53,9 +69,7 @@
             </li>
             <li class="nav-item">              
               <%= button_to "Logout", logout_path, class: "nav-link logout", method: :post%>
-            </li>
-
-
+            </li>            
           <% else %>
             <li class="nav-item">
               <%= link_to "Sign Up", '/signup', class: "nav-link" %>
@@ -63,9 +77,19 @@
             <li class="nav-item">
               <%= link_to "Log In", '/login', class: "nav-link" %>
             </li>
-          <% end %>
-     
+          <% end %>     
         </ul>
+
+        <% if logged_in? && current_user.admin? %>
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item"> <a class="nav-link"> Admin </a></li>
+          </ul>        
+        <% elsif logged_in? && !current_user.admin? %>
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link"> Not Admin </a></li>
+          </ul>
+        <%end%>
+
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
