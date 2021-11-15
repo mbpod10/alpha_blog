@@ -102,10 +102,16 @@ i {
   .group-b {
     margin-left: 2px;
     margin-right: 2px;
+    margin-bottom: 10px;
   }
 
   .dropdown-b {
     color: black;
     border: none;
     background-color: white
+  }
+
+  .category-box{
+    display: flex;
+    flex-direction: row;
   }

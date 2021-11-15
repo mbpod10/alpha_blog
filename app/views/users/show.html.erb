@@ -6,15 +6,17 @@
   <% end %>    
 </div>
 
-<% if @user.articles.any? %>
-  <h4 class="text-center mt-4"> <%= @user.username %>'s Articles </h4>
-  <div class="flickr_pagination">    
-    <%= will_paginate @articles, :container => false %>
-  </div>
-  <%=render :partial => "articles/article" if @user.articles %>
-  <div class="flickr_pagination">    
-    <%= will_paginate @articles, :container => false %>
-  </div>
-<% else %>
-  <h4 class="text-center mt-4"> No Articles Posted Yet </h4>
-<% end %>
+<div class="container">
+  <% if @user.articles.any? %>
+    <h4 class="text-center mt-4"> <%= @user.username %>'s Articles </h4>
+    <div class="flickr_pagination">    
+      <%= will_paginate @articles, :container => false %>
+    </div>
+    <%=render :partial => "articles/article" if @user.articles %>
+    <div class="flickr_pagination">    
+      <%= will_paginate @articles, :container => false %>
+    </div>
+  <% else %>
+    <h4 class="text-center mt-4"> No Articles Posted Yet </h4>
+  <% end %>
+</div>

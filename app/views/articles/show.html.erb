@@ -2,10 +2,20 @@
   <h1 class="text-center mt-4"><%= @article.title %></h1>
   <div class="card text-center">
     <div class="card-header">
-      <i><%= @article.user.username %></i>
+      <i><%= link_to @article.user.username, user_path(@article.user), class: "user_index_link" %></i>
     </div>
     <div class="card-body">    
       <div class="card-text article-left"> <%= simple_format(@article.description) %></div>
+      <h5 class="article-left"> Categories </h5>
+        <div class="category-box">
+          <% if @article.categories.any? %>
+            <% @article.categories.each do |category| %>
+              <%= link_to category.name, category_path(category), class: "btn btn-outline-info group-b" %>
+            <% end %>
+          <% else %>
+            <p class="article-left"> <i>No Categories</i> </p>
+          <% end %>
+        </div>
          <% if logged_in? && (@article.user == current_user || current_user.admin?)%>
           <div class="button-group">       
             <%= link_to "Edit", edit_article_path(@article), class: "btn btn-outline-info group-b" %>

@@ -614,3 +614,7 @@ end
 ```
 $ rails db:migrate
 ```
+```rb
+$ article = Article.new(title: "Another title", description: "Another description", user: User.last, category_ids: [1,2])
+$ article.save
+```

@@ -6,6 +6,18 @@
     <div class="card-body">
       <h5 class="card-title"><%= article.title %></h5>      
       <p class="card-text article-left"> <%= article.description %></p>
+
+      
+      <div class="category-box">
+        <% if article.categories.any? %>
+          <% article.categories.each do |category| %>
+            <%= link_to category.name, category_path(category), class: "btn btn-outline-info group-b" %>
+          <% end %>
+        <% else %>
+          <p class="article-left"> <i>No Categories</i> </p>
+        <% end %>
+      </div>
+
       <div class="button-group">
         <%= link_to "View", article_path(article), class: "btn btn-outline-success group-b" %>
         <% if logged_in? && (article.user == current_user || current_user.admin?)%>

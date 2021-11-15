@@ -5,6 +5,7 @@ class CategoriesController < ApplicationController
   
   
   def show
+    @articles = set_category.articles
   end
 
   def index
