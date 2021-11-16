@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show]
-  before_action :require_admin, except: [:index, :show]
+  before_action :require_admin, except: [:index, :show, :destroy]
   before_action :category_params, only:[:create]
   
   
@@ -24,6 +24,12 @@ class CategoriesController < ApplicationController
      else
        render 'new'
      end
+  end
+
+  def destroy    
+    @category.destroy
+    flash[:notice] = "'#{@category.name}' Deleted!"
+    redirect_to categories_path
   end
 
 

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'pages#home'
   get 'admin', to: 'pages#admin'
   resources :articles
+  resources :categories
   get 'signup', to: 'users#new'
   # get 'login', to: 'pages#login'
   resources :users, except: [:new]

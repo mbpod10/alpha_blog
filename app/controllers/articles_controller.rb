@@ -20,10 +20,10 @@ class ArticlesController < ApplicationController
   end
 
   # current_user is from /app/controllers/application_controller.rb
-  def create
+  def create   
     @article = Article.new(article_params)
+    check_category_tags()
     @article.user = current_user
-    
     if @article.save
       flash[:notice] = "Article was created successfully!"
       redirect_to @article
@@ -55,6 +55,23 @@ class ArticlesController < ApplicationController
   def article_params
     params.require(:article).permit(:title, :description, category_ids: [])
   end
+
+  def check_category_tags   
+    str = article_params[:description].split(" ").each { |c|
+      if c[0] == "#"
+        word = (c[1...]).titleize     
+        if Category.exists?(name: word)         
+            @article.categories << Category.where(name: word)
+        else
+          new_category = Category.create(name: word)
+          if new_category.save
+            @article.categories << new_category
+          end
+        end
+      end
+    }   
+  end
+  
 
   def require_same_user
     if current_user != @article.user && !current_user.admin?

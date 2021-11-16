@@ -81,11 +81,18 @@
         </ul>
 
         <% if logged_in? && current_user.admin? %>
-          <ul class="navbar-nav mb-2 mb-lg-0">
+          <ul class="navbar-nav mb-2 mb-lg-0">      
+            <%= link_to(new_article_path) do %>
+              <li class="fa fa-plus-square nav-link"> </li>
+            <% end %>
             <li class="nav-item"> <a class="nav-link"> Admin </a></li>
-          </ul>        
+          </ul>  
+                
         <% elsif logged_in? && !current_user.admin? %>
           <ul class="navbar-nav mb-2 mb-lg-0">
+            <%= link_to(new_article_path) do %>
+              <li class="fa fa-plus-square nav-link"> </li>
+            <% end %>           
             <li class="nav-item"><a class="nav-link"> Not Admin </a></li>
           </ul>
         <%end%>
