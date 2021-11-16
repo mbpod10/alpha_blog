@@ -22,7 +22,7 @@ class ArticlesController < ApplicationController
   # current_user is from /app/controllers/application_controller.rb
   def create   
     @article = Article.new(article_params)
-    check_category_tags()
+    check_category_tags("Post")
     @article.user = current_user
     if @article.save
       flash[:notice] = "Article was created successfully!"
@@ -32,7 +32,8 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def update     
+  def update
+    check_category_tags("Update")
     if @article.update(article_params)
       flash[:notice] = "Article Titled '#{@article.title}' Was Updated"
       redirect_to @article
@@ -56,19 +57,24 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:title, :description, category_ids: [])
   end
 
-  def check_category_tags   
-    str = article_params[:description].split(" ").each { |c|
-      if c[0] == "#"
-        word = (c[1...]).titleize     
-        if Category.exists?(name: word)         
-            @article.categories << Category.where(name: word)
-        else
-          new_category = Category.create(name: word)
-          if new_category.save
-            @article.categories << new_category
-          end
+  def check_category_tags(method)
+    if method == "Post"
+      str = article_params[:description]
+    elsif method == "Update"
+      str = @article.description
+    end
+    str.split(" ").each { |c|
+    if c[0] == "#"
+      word = (c[1...]).titleize     
+      if Category.exists?(name: word)         
+          @article.categories << Category.where(name: word)
+      else
+        new_category = Category.create(name: word)
+        if new_category.save
+          @article.categories << new_category
         end
       end
+    end
     }   
   end
   

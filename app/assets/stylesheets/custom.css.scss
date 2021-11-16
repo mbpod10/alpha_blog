@@ -115,9 +115,26 @@ i {
     display: flex;
     flex-direction: row;
   }
-
-  .fa{
+ 
+  .add-nav-bar {    
     color: limegreen !important;
-    font-size: 1.5rem;
-    
+    font-size: 1.5rem !important;    
+  }
+  
+  .delete-category {
+    font-size: 1.5rem !important;    
+    color: red;
+    background: white;
+  }
+  
+  .delete-cat-fa {
+    border: none !important;
+    background: white;
+    margin-left: 25%;
+  }
+
+  .cat-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }

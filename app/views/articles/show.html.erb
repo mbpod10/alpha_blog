@@ -6,7 +6,7 @@
     </div>
     <div class="card-body">    
       <div class="card-text article-left"> <%= simple_format(@article.description) %></div>
-      <h5 class="article-left"> Categories </h5>
+      
         <div class="category-box">
           <% if @article.categories.any? %>
             <% @article.categories.each do |category| %>
@@ -16,6 +16,7 @@
             <p class="article-left"> <i>No Categories</i> </p>
           <% end %>
         </div>
+        
          <% if logged_in? && (@article.user == current_user || current_user.admin?)%>
           <div class="button-group">       
             <%= link_to "Edit", edit_article_path(@article), class: "btn btn-outline-info group-b" %>
