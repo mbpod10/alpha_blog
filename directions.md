@@ -8,6 +8,27 @@
 `git commit -m 'first commit`
 `git push origin master`
 
+## Add New Git Branch
+`git checkout -b create-users-table-model`
+`>> Switched to a new branch 'create-users-table-model'`
+`git branch`
+```
+* create-users-table-model
+master
+```
+Switch back to master
+`git checkout master`
+Switch back to `'create-users-table-model'`
+
+CREATE COMMMIT
+```
+git add .
+git commit -m '<MESSAGE>
+git checkout master
+git merge create-users-table-model
+git push origin master
+```
+
 ## BACK END
 
 `rails generate migration create_articles`
@@ -260,26 +281,7 @@ NOTE: These routes are `keyword routes` for rails, in other words, you cannot ad
 Create a `new` method in the `articles_controller.rb` and a new view of `new.html.erb` in the `app/views/articles` controller
 Finally go to `http://localhost:3000/articles/new`
 
-## Add New Git Branch
-`git checkout -b create-users-table-model`
-`>> Switched to a new branch 'create-users-table-model'`
-`git branch`
-```
-* create-users-table-model
-master
-```
-Switch back to master
-`git checkout master`
-Switch back to `'create-users-table-model'`
 
-CREATE COMMMIT
-```
-git add .
-git commit -m '<MESSAGE>
-git checkout master
-git merge create-users-table-model
-git push origin master
-```
 
 ## Users
 `rails generate migration create_users`
