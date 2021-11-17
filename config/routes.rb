@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :articles
   resources :categories
   get 'signup', to: 'users#new'
+  # get 'articles/search/:search', to: 'articles#search'
   # get 'login', to: 'pages#login'
   resources :users, except: [:new]
   get 'login', to: 'sessions#new'
@@ -13,3 +14,6 @@ Rails.application.routes.draw do
   # post 'users', to: 'users#create'
   resources :categories, except: [:destroy]
 end
+
+
+

@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :destroy]
-  before_action :require_admin, except: [:index, :show, :destroy]
+  before_action :require_admin, except: [:index, :show]
   before_action :category_params, only:[:create]
   
   
