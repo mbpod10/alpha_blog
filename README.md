@@ -1,4 +1,4 @@
-[For Directions on Alpha Blog](/directions)
+[For Directions on Alpha Blog](/directions.md)
 
 # Alpha Blog
 
