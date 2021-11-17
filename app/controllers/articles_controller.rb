@@ -8,11 +8,15 @@ class ArticlesController < ApplicationController
   def show      
   end
 
-  def index 
+  def index
+    # Article.search() from `app/models/article.rb`
     @articles = Article.search(params[:search]).paginate(page: params[:page], per_page: 5)
     if params[:search]
       @search = params[:search]
-    end 
+    end
+    # Article.last_article from `app/models/article.rb`
+    # m =  Article.last_article()
+   
   end
 
   def new
